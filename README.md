@@ -1,6 +1,6 @@
-### instruction
+## instruction
 docker image link: https://hub.docker.com/r/sayan141/resturant_api/tags
-## Pull the docker image
+### Pull the docker image
 ```
 docker pull sayan141/resturant_api:latest
 ```
