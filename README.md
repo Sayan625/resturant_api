@@ -9,3 +9,14 @@ docker pull sayan141/resturant_api:latest
 docker run -p 3000:3000  sayan141/resturant_api:latest
 ```
 the node app will run on port 3000 on the machine
+
+#or
+
+clone this repo
+
+run the commands in working directory
+```
+npm i
+npm start
+```
+
