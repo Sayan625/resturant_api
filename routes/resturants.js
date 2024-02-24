@@ -4,10 +4,10 @@ const resturant_model = require('../models/resturant_model.js');
 const authentication = require('../middlewere/authentication.js');
 
 // Apply authentication middleware for all routes in this router
-router.use(authentication);
+// router.use(authentication);
 
 // Route to get outlets within a certain radius from provided latitude and longitude
-router.get('/outlet', async (req, res) => {
+router.get('/outlet',authentication, async (req, res) => {
     try {
         // Calculate latitude and longitude range based on provided radius
         const lats = find_lat_min_max(req.body.latitude, req.body.Radius);
@@ -56,7 +56,7 @@ router.get('/outlet', async (req, res) => {
 });
 
 // Route to get outlet details by ID
-router.get('/outlet/:id', async (req, res) => {
+router.get('/outlet/:id',authentication, async (req, res) => {
     try {
         const all_data = await resturant_model.find({ _id: req.params.id }).lean();
         res.json(all_data);
@@ -67,7 +67,7 @@ router.get('/outlet/:id', async (req, res) => {
 });
 
 // Route to get outlets within a range of radius
-router.get('/outlet_by_range', async (req, res) => {
+router.get('/outlet_by_range',authentication, async (req, res) => {
     try {
         // Calculate latitude and longitude range based on provided maximum radius
         const max_lats = find_lat_min_max(req.body.latitude, req.body.maxRadius);
@@ -114,7 +114,7 @@ router.get('/outlet_by_range', async (req, res) => {
 });
 
 // Route to create a new outlet
-router.post('/create_outlet', async (req, res) => {
+router.post('/create_outlet',authentication, async (req, res) => {
     try {
         console.log(req.body);
         const new_outlet = new resturant_model(req.body);
@@ -126,7 +126,7 @@ router.post('/create_outlet', async (req, res) => {
 });
 
 // Route to update an outlet by ID
-router.put('/update_outlet/:id', async (req, res) => {
+router.put('/update_outlet/:id',authentication, async (req, res) => {
     const id = req.params.id;
     
     try {
@@ -151,7 +151,7 @@ router.put('/update_outlet/:id', async (req, res) => {
 });
 
 // Route to delete an outlet by ID
-router.delete('/delete_outlet/:id', async (req, res) => {
+router.delete('/delete_outlet/:id',authentication, async (req, res) => {
     const id = req.params.id;
     try {
         const outlet = await resturant_model.findById(id);
